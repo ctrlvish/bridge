@@ -41,7 +41,7 @@ export default function Signup(){
                         type='text' 
                         onChange={(e) => setEmail(e.target.value)} 
                         value={email}
-                        className="w-full border rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black" >
+                        className="w-full border border-border rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring bg-background text-foreground" >
                             
                     </input>
 
@@ -51,7 +51,7 @@ export default function Signup(){
                         type='password' 
                         onChange={(e) => setPassword(e.target.value)} 
                         value={password}
-                        className="w-full border rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black" >
+                        className="w-full border border-border rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring bg-background text-foreground" >
                     </input>
 
                     <label htmlFor='email-input'>Confirm password</label>
@@ -60,11 +60,11 @@ export default function Signup(){
                         type='password' 
                         onChange={(e) => setCfmPassword(e.target.value)} 
                         value={cfmPassword}
-                        className="w-full border rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black" >
+                        className="w-full border border-border rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring bg-background text-foreground" >
                     </input>
                     {!passwordMatch && submitted && <p className='text-red-800'>Passwords do not match</p>}
                     {error && <p className='text-red-800'>{error}</p>}
-                    <button className="w-full bg-black text-white py-2 rounded-md text-sm mt-5 cursor-pointer">Sign up</button>
+                    <button className="w-full bg-primary text-primary-foreground py-2 rounded-md text-sm mt-5 cursor-pointer">Sign up</button>
                 </form>
             </div>
         </div>
