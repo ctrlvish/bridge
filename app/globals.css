@@ -48,25 +48,28 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+
+/* goal is to have 80% of my content as neutrals, since its more text than brand elements */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
+  --background: oklch(0.99 0.008 80);            /* main neutral */
+  --card: oklch(0.97 0.010 75);                  /* darker netural for cards */
+  --foreground: oklch(0.18 0.04 150);            /* dark forest-green for text */
+  --muted-foreground: oklch(0.52 0.02 150);      /* muted green-grey for secondary text */
+  --border: oklch(0.90 0.012 75);                /* warm neutral border */
+  --primary: oklch(0.35 0.08 150);               /* forest theme */
+  --primary-foreground: oklch(0.99 0 0);         /* light text on the primary */
+  --accent: oklch(0.82 0.08 350);                /* pink-accent */
+  --accent-foreground: oklch(0.18 0.04 150);     /* dark text on accent */
+  --muted: oklch(0.9327 0.0161 82.79);           /* for recessed elements */
+  --ring: oklch(0.5406 0.0773 152.71);           /* accessibility ring */
+  /* rest of the defaults */
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -84,24 +87,25 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
+  --background: oklch(0.18 0.03 150);         /* dark mode background */
+  --card: oklch(0.22 0.04 150);               /* slightly lighter cards */
+  --foreground: oklch(0.93 0.008 80);         /* warm off-white text */
+  --muted-foreground: oklch(0.65 0.02 150);   /* warm off-white text */
+  --border: oklch(0.28 0.03 150);             /* warm off-white text */
+  --primary: oklch(0.55 0.10 150);            /* brighter primary for visibility */
+  --primary-foreground: oklch(0.12 0.03 150); /* dark text on primary */
+  --accent: oklch(0.78 0.12 320);             /* lavender-pink */
+  --accent-foreground: oklch(0.18 0.04 150);  /* dark text on accent */
+  --muted: oklch(0.2965 0.0318 161.9);        /* for recessed elements */
+  --ring: oklch(0.6962 0.0962 154.17);        /* accessibility ring */
+  /* rest of the defaults */
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
