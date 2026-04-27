@@ -19,22 +19,20 @@ export default async function Feed(){
 
     if (!data) return <p>No posts</p>
     return (
-        <>
-        {data.map(post => {
-            return(
-                <PostCard
-                    key = {post.id}
-                    body = {post.body}
-                    createdAt = {post.created_at}
-                    musicArtworkUrl = {post.music_artwork_url} musicCreator = {post.music_creator} 
-                    musicTitle = {post.music_title} 
-                    title = {post.title} 
-                    displayName = {post.users.display_name}
-                    avatarUrl = {post.users.avatar_url}
-
-                ></PostCard>
-            )
-        })}
-        </>
+        <div className="max-w-lg mx-auto px-4 py-4 bg-background min-h-screen">
+            {data.map(post => {
+                return(
+                    <PostCard
+                        key = {post.id}
+                        title = {post.title} 
+                        body = {post.body}
+                        spotifyUrl = {post.spotify_url}
+                        createdAt = {post.created_at}
+                        displayName = {post.users.display_name}
+                        avatarUrl = {post.users.avatar_url}
+                    ></PostCard>
+                )
+            })}
+        </div>
     )
 }
