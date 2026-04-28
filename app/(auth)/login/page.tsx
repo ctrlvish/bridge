@@ -2,6 +2,7 @@
 import {useState} from 'react'
 import { createClient } from '@/lib/supabase/client'
 import {useRouter} from 'next/navigation'
+import Link from 'next/link'
 
 
 export default function Login(){
@@ -52,8 +53,9 @@ export default function Login(){
                     </input>
 
                     {error && <p className='text-destructive text-sm'>{error}</p>}
-                    <button className="w-full bg-primary text-primary-foreground py-2 rounded-md text-sm mt-5 cursor-pointer">Sign up</button>
+                    <button className="w-full bg-primary text-primary-foreground py-2 rounded-md text-sm mt-5 cursor-pointer">Sign in</button>
                 </form>
+                <Link href='/signup' className='text-primary underline'>Don't have an account? Sign up</Link>
             </div>
         </div>
     )
