@@ -55,7 +55,7 @@ export default function PostCard(props: PostCardProps) {
 
       {/* content */}
       <h2 className="mt-3 text-lg font-semibold text-foreground leading-snug">{title}</h2>
-      <p className="text-sm mt-1 text-muted-foreground leading-relaxed">{body}</p>
+      <p className="text-sm mt-1 text-foreground leading-relaxed">{body}</p>
 
       {/* spotify */}
       {spotifyUrl && (

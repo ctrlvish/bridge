@@ -54,7 +54,7 @@
   --background: oklch(0.99 0.008 80);            /* main neutral */
   --card: oklch(0.97 0.010 75);                  /* darker netural for cards */
   --foreground: oklch(0.18 0.04 150);            /* dark forest-green for text */
-  --muted-foreground: oklch(0.52 0.02 150);      /* muted green-grey for secondary text */
+  --muted-foreground: oklch(0.30 0.03 150);      /* readable green-grey for secondary text */
   --border: oklch(0.90 0.012 75);                /* warm neutral border */
   --primary: oklch(0.35 0.08 150);               /* forest theme */
   --primary-foreground: oklch(0.99 0 0);         /* light text on the primary */
