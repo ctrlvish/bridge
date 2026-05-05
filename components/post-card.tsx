@@ -1,4 +1,4 @@
-import { Heart, MessageCircle } from "lucide-react"
+import { Heart, MessageCircle, User } from "lucide-react"
 
 interface PostCardProps {
   body: string
@@ -19,9 +19,6 @@ export default function PostCard(props: PostCardProps) {
     spotifyUrl,
   } = props
 
-  const avatar =
-    avatarUrl ?? `https://api.dicebear.com/9.x/glass/svg?seed=${displayName}`
-
   const hours = Math.floor(
     (Date.now() - new Date(createdAt).getTime()) / 3600000
   )
@@ -39,7 +36,17 @@ export default function PostCard(props: PostCardProps) {
       {/* header */}
       <div className="flex items-center justify-between text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
-          <img src={avatar} className="w-8 h-8 rounded-full" />
+          <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-muted text-foreground">
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt={displayName}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <User className="h-4 w-4" />
+            )}
+          </span>
           <span className="text-foreground font-medium">{displayName}</span>
           <span className="text-muted-foreground">·</span>
           <span className="text-muted-foreground">{time}</span>
