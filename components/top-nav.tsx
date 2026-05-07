@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { User } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
+import ProfileMenu from '@/components/profile-menu'
+
 
 export default async function TopNav() {
 
@@ -28,21 +29,11 @@ export default async function TopNav() {
         </Link>
 
         {profile ? (
-          <Link
-            href="/settings"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground"
-            aria-label="Open settings"
-          >
-            {profile.avatar_url ? (
-              <img
-                src={profile.avatar_url}
-                alt={profile.display_name}
-                className="h-full w-full rounded-full object-cover"
-              />
-            ) : (
-              <User className="h-4 w-4" />
-            )}
-          </Link>
+          <ProfileMenu
+            username={profile.username}
+            displayName={profile.display_name}
+            avatarUrl={profile.avatar_url}
+          />
         ) : (
           <Link href="/login" className="text-sm font-medium text-primary">
             Log in
