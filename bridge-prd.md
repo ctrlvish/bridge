@@ -182,8 +182,8 @@ Mobile-first. Most shared links will be opened on a phone. Post reading on mobil
 
 ### Ideas
 
-1. 
-2. 
+1.
+2.
 
 ---
 

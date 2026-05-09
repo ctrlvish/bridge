@@ -1,14 +1,14 @@
-'use client'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { LogOut, Settings, User } from 'lucide-react'
-import { useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { LogOut, Settings, User } from "lucide-react";
+import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 interface ProfileMenuProps {
-  username: string
-  displayName: string
-  avatarUrl: string | null
+  username: string;
+  displayName: string;
+  avatarUrl: string | null;
 }
 
 export default function ProfileMenu({
@@ -16,15 +16,15 @@ export default function ProfileMenu({
   displayName,
   avatarUrl,
 }: ProfileMenuProps) {
-  const [open, setOpen] = useState(false)
-  const router = useRouter()
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   async function handleLogOut() {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    setOpen(false)
-    router.replace('/login')
-    router.refresh()
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setOpen(false);
+    router.replace("/login");
+    router.refresh();
   }
 
   return (
@@ -78,5 +78,5 @@ export default function ProfileMenu({
         </div>
       )}
     </div>
-  )
+  );
 }

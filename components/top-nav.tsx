@@ -1,25 +1,22 @@
-import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
-import ProfileMenu from '@/components/profile-menu'
-
+import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import ProfileMenu from "@/components/profile-menu";
 
 export default async function TopNav() {
+  const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getUser();
 
-  const supabase = await createClient()
-  const { data: authData } = await supabase.auth.getUser()
-
-  let profile = null
+  let profile = null;
 
   if (authData.user) {
     const { data } = await supabase
-      .from('users')
-      .select('username, display_name, avatar_url')
-      .eq('id', authData.user.id)
-      .single()
+      .from("users")
+      .select("username, display_name, avatar_url")
+      .eq("id", authData.user.id)
+      .single();
 
-    profile = data
+    profile = data;
   }
-
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
@@ -41,5 +38,5 @@ export default async function TopNav() {
         )}
       </div>
     </header>
-)
+  );
 }

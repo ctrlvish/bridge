@@ -4,8 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 const figtree = Figtree({
-  variable:'--font-sans',
-  subsets:['latin'], 
+  variable: "--font-sans",
+  subsets: ["latin"],
 });
 
 const geistSans = Geist({
@@ -31,7 +31,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, figtree.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        geistSans.variable,
+        geistMono.variable,
+        figtree.variable,
+      )}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
