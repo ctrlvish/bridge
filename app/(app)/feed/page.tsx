@@ -6,12 +6,17 @@ export default async function Feed() {
   const supabase = await createClient();
   const { data: authData } = await supabase.auth.getUser();
 
-  const { data, error } = await supabase.from("posts").select(`*,
+  const { data, error } = await supabase
+    .from("posts")
+    .select(
+      `*,
             users!posts_user_id_fkey(
             display_name,
             avatar_url
             )
-        `).order("created_at", { ascending: false });
+        `,
+    )
+    .order("created_at", { ascending: false });
   console.log("data:", data);
   console.log("error:", error);
 
