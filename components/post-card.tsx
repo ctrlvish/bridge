@@ -12,16 +12,10 @@ interface PostCardProps {
 export default function PostCard(props: PostCardProps) {
   const { body, createdAt, title, displayName, avatarUrl, spotifyUrl } = props;
 
-  const hours = Math.floor(
-    (Date.now() - new Date(createdAt).getTime()) / 3600000,
-  );
-
-  const time =
-    hours < 1
-      ? "just now"
-      : hours < 24
-        ? `${hours}h`
-        : `${Math.floor(hours / 24)}d`;
+  const time = new Date(createdAt).toLocaleDateString("en-AU", {
+    day: "numeric",
+    month: "short",
+  });
 
   const embedParts = spotifyUrl?.split("/");
   const embedType = embedParts?.[3];

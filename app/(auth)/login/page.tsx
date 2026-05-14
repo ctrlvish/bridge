@@ -55,7 +55,7 @@ export default function Login() {
           </button>
         </form>
         <Link href="/signup" className="text-primary underline">
-          Don't have an account? Sign up
+          Don&apos;t have an account? Sign up
         </Link>
       </div>
     </div>
