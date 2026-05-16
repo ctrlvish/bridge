@@ -12,6 +12,7 @@ interface PostCardProps {
   username: string;
   avatarUrl: string | null;
   spotifyUrl: string | null;
+  source?: "feed" | "profile";
 }
 
 export default function PostCard(props: PostCardProps) {
@@ -24,6 +25,7 @@ export default function PostCard(props: PostCardProps) {
     username,
     avatarUrl,
     spotifyUrl,
+    source = "feed",
   } = props;
 
   const time = new Date(createdAt).toLocaleDateString("en-AU", {
@@ -34,7 +36,7 @@ export default function PostCard(props: PostCardProps) {
   return (
     <article className="relative mb-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
       <Link
-        href={`/post/${id}?from=feed`}
+        href={source === "feed" ? `/post/${id}?from=feed` : `/post/${id}`}
         className="absolute inset-0 rounded-2xl"
         aria-label={`Open ${title}`}
       />
