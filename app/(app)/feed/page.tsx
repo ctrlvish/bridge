@@ -11,6 +11,7 @@ export default async function Feed() {
     .select(
       `*,
             users!posts_user_id_fkey(
+            username,
             display_name,
             avatar_url
             )
@@ -29,11 +30,13 @@ export default async function Feed() {
         return (
           <PostCard
             key={post.id}
+            id={post.id}
             title={post.title}
             body={post.body}
             spotifyUrl={post.spotify_url}
             createdAt={post.created_at}
             displayName={post.users.display_name}
+            username={post.users.username}
             avatarUrl={post.users.avatar_url}
           ></PostCard>
         );

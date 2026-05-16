@@ -1,30 +1,46 @@
-import { Heart, MessageCircle, User } from "lucide-react";
+import Link from "next/link";
+import { User } from "lucide-react";
+import PostActions from "@/components/post-actions";
+import SpotifyEmbed from "@/components/spotify-embed";
 
 interface PostCardProps {
+  id: string;
   body: string;
   createdAt: string;
   title: string;
   displayName: string;
+  username: string;
   avatarUrl: string | null;
   spotifyUrl: string | null;
 }
 
 export default function PostCard(props: PostCardProps) {
-  const { body, createdAt, title, displayName, avatarUrl, spotifyUrl } = props;
+  const {
+    id,
+    body,
+    createdAt,
+    title,
+    displayName,
+    username,
+    avatarUrl,
+    spotifyUrl,
+  } = props;
 
   const time = new Date(createdAt).toLocaleDateString("en-AU", {
     day: "numeric",
     month: "short",
   });
 
-  const embedParts = spotifyUrl?.split("/");
-  const embedType = embedParts?.[3];
-  const embedId = embedParts?.[4]?.split("?")[0];
-
   return (
-    <div className="bg-card p-5 rounded-2xl border border-border mb-3">
+    <article className="relative mb-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
+      <Link
+        href={`/post/${id}`}
+        className="absolute inset-0 rounded-2xl"
+        aria-label={`Open ${title}`}
+      />
+
       {/* header */}
-      <div className="flex items-center justify-between text-sm text-muted-foreground">
+      <div className="pointer-events-none relative z-10 flex items-center justify-between text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-muted text-foreground">
             {avatarUrl ? (
@@ -37,43 +53,34 @@ export default function PostCard(props: PostCardProps) {
               <User className="h-4 w-4" />
             )}
           </span>
-          <span className="text-foreground font-medium">{displayName}</span>
+          <Link
+            href={`/profile/${username}`}
+            className="pointer-events-auto font-medium text-foreground hover:underline"
+          >
+            {displayName}
+          </Link>
           <span className="text-muted-foreground">·</span>
           <span className="text-muted-foreground">{time}</span>
         </div>
       </div>
 
       {/* content */}
-      <h2 className="mt-3 text-lg font-semibold text-foreground leading-snug">
+      <h2 className="pointer-events-none relative z-10 mt-3 text-lg font-semibold leading-snug text-foreground">
         {title}
       </h2>
-      <p className="text-sm mt-1 text-foreground leading-relaxed">{body}</p>
+      <p className="pointer-events-none relative z-10 mt-1 text-sm leading-relaxed text-foreground">
+        {body}
+      </p>
 
       {/* spotify */}
       {spotifyUrl && (
-        <div className="mt-1 rounded-xl overflow-hidden">
-          <iframe
-            src={`https://open.spotify.com/embed/${embedType}/${embedId}`}
-            width="100%"
-            height="80"
-            allowFullScreen
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          />
+        <div className="relative z-10 mt-1">
+          <SpotifyEmbed spotifyUrl={spotifyUrl} />
         </div>
       )}
 
       {/* actions */}
-      <div className="flex items-center gap-5 mt-4 text-muted-foreground">
-        <button className="flex items-center gap-1.5 hover:text-primary transition-colors">
-          <Heart className="w-4 h-4" />
-          <span className="text-xs">0</span>
-        </button>
-        <button className="flex items-center gap-1.5 hover:text-primary transition-colors">
-          <MessageCircle className="w-4 h-4" />
-          <span className="text-xs">0</span>
-        </button>
-      </div>
-    </div>
+      <PostActions postId={id} />
+    </article>
   );
 }
