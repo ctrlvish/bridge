@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { User } from "lucide-react";
+import { ArrowLeft, User } from "lucide-react";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import PostActions from "@/components/post-actions";
@@ -9,10 +9,14 @@ interface PostPageProps {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{
+    from?: string;
+  }>;
 }
 
 export default async function PostPage(props: PostPageProps) {
   const { id } = await props.params;
+  const searchParams = await props.searchParams;
   const supabase = await createClient();
 
   const { data: post, error } = await supabase
@@ -41,7 +45,17 @@ export default async function PostPage(props: PostPageProps) {
   });
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-5">
+    <main className="mx-auto max-w-lg px-4 py-5">
+      {searchParams.from === "feed" && (
+        <Link
+          href="/feed"
+          className="mb-4 flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>Back to feed</span>
+        </Link>
+      )}
+
       <article className="border-b border-border pb-6">
         <div className="flex items-center gap-3 text-sm text-muted-foreground">
           <span className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-muted text-foreground">
