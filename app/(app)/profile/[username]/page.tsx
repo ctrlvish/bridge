@@ -1,6 +1,8 @@
 import { User } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import BackButton from "@/components/back-button";
 import PostCard from "@/components/post-card";
 
 interface ProfilePageProps {
@@ -12,6 +14,7 @@ interface ProfilePageProps {
 export default async function ProfilePage(props: ProfilePageProps) {
   const { username } = await props.params;
   const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getUser();
 
   const { data: profile, error } = await supabase
     .from("users")
@@ -52,9 +55,12 @@ export default async function ProfilePage(props: ProfilePageProps) {
     month: "long",
     year: "numeric",
   });
+  const isOwnProfile = authData.user?.id === profile.id;
 
   return (
     <main className="mx-auto max-w-lg px-4 py-5">
+      <BackButton />
+
       <section className="border-b border-border pb-6">
         <div className="flex items-start gap-4">
           <span className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-muted text-foreground">
@@ -80,6 +86,15 @@ export default async function ProfilePage(props: ProfilePageProps) {
               Joined {joinedAt}
             </p>
           </div>
+
+          {isOwnProfile && (
+            <Link
+              href="/settings"
+              className="shrink-0 rounded-md border border-border px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+            >
+              Edit
+            </Link>
+          )}
         </div>
 
         {profile.bio && (
