@@ -2,7 +2,14 @@ import { createClient } from "@/lib/supabase/server";
 import PostCard from "@/components/post-card";
 import CreatePostForm from "@/components/create-post-form";
 
-export default async function Feed() {
+interface FeedProps {
+  searchParams: Promise<{
+    create?: string;
+  }>;
+}
+
+export default async function Feed(props: FeedProps) {
+  const searchParams = await props.searchParams;
   const supabase = await createClient();
   const { data: authData } = await supabase.auth.getUser();
 
@@ -24,7 +31,10 @@ export default async function Feed() {
   if (!data) return <p>No posts</p>;
   return (
     <div className="max-w-lg mx-auto px-4 py-4">
-      <CreatePostForm isAuthenticated={Boolean(authData.user)} />
+      <CreatePostForm
+        isAuthenticated={Boolean(authData.user)}
+        initialOpen={searchParams.create === "1"}
+      />
 
       {data.map((post) => {
         return (

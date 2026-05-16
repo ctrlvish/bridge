@@ -34,7 +34,7 @@ export default function PostCard(props: PostCardProps) {
   return (
     <article className="relative mb-3 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
       <Link
-        href={`/post/${id}`}
+        href={`/post/${id}?from=feed`}
         className="absolute inset-0 rounded-2xl"
         aria-label={`Open ${title}`}
       />

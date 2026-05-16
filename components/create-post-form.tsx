@@ -1,23 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Send, User, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 interface CreatePostFormProps {
   isAuthenticated: boolean;
+  initialOpen?: boolean;
 }
 
 export default function CreatePostForm(props: CreatePostFormProps) {
-  const { isAuthenticated } = props;
+  const { isAuthenticated, initialOpen = false } = props;
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [spotifyUrl, setSpotifyUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    function openCreatePostForm() {
+      setIsOpen(true);
+    }
+
+    window.addEventListener("bridge:create-post", openCreatePostForm);
+
+    return () => {
+      window.removeEventListener("bridge:create-post", openCreatePostForm);
+    };
+  }, []);
 
   const handleSubmit: React.ComponentProps<"form">["onSubmit"] = async (
     event,
