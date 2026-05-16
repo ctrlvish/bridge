@@ -32,19 +32,24 @@ export default function ProfileMenu({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-border bg-card text-foreground"
+        className="flex h-9 items-center gap-2 rounded-full border border-border bg-card pl-1 pr-3 text-foreground"
         aria-label="Open profile menu"
         aria-expanded={open}
       >
-        {avatarUrl ? (
-          <img
-            src={avatarUrl}
-            alt={displayName}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <User className="h-4 w-4" />
-        )}
+        <span className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-muted">
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt={displayName}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <User className="h-4 w-4" />
+          )}
+        </span>
+        <span className="max-w-28 truncate text-sm font-medium">
+          @{username}
+        </span>
       </button>
 
       {open && (
