@@ -3,29 +3,45 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { getAuthErrorMessage, isValidEmail } from "@/lib/auth-errors";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
-  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  const handleSubmit: React.ComponentProps<"form">["onSubmit"] = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail || !password) {
+      setError("Enter your email and password.");
+      return;
+    }
+
+    if (!isValidEmail(trimmedEmail)) {
+      setError("Enter a valid email address.");
+      return;
+    }
+
     const supabase = createClient();
     const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
+      email: trimmedEmail,
       password: password,
     });
+
     if (error) {
-      setError(error.message);
+      setError(getAuthErrorMessage(error));
+      return;
     }
+
     if (data.user) {
       router.push("/feed");
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -33,16 +49,18 @@ export default function Login() {
         <form onSubmit={handleSubmit}>
           <label htmlFor="email-input">Email</label>
           <input
-            name="email-input"
-            type="text"
+            id="email-input"
+            name="email"
+            type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             className="w-full border border-border rounded-md px-3 py-2 text-sm bg-background text-foreground outline-none focus:ring-2 focus:ring-ring"
           ></input>
 
-          <label htmlFor="email-input">Password</label>
+          <label htmlFor="password-input">Password</label>
           <input
-            name="password-input"
+            id="password-input"
+            name="password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
